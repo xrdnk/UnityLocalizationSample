@@ -1,6 +1,6 @@
 # UnityLocalizationSample
 
-Unity Localization のサンプルプロジェクトです．</br>
+Samples of Unity Localization.</br>
 
 # Dependencies
 

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace Deniverse.UnityLocalizationSample.Presentation.UIView
 {
+    /// <summary>
+    /// トグル形式でローカライズ情報を表示するビュー
+    /// </summary>
     public sealed class LanguageSelectToggleUIView : MonoBehaviour
     {
         [SerializeField] Transform _container;
@@ -14,6 +17,9 @@ namespace Deniverse.UnityLocalizationSample.Presentation.UIView
         ToggleGroup _toggleGroup;
 
         public delegate void SelectionChanged(int index);
+        /// <summary>
+        /// 選択中のトグル項目が変更された時のイベントを発火
+        /// </summary>
         public SelectionChanged SelectionChangedEvent;
 
         void Start()
@@ -24,9 +30,9 @@ namespace Deniverse.UnityLocalizationSample.Presentation.UIView
         /// <summary>
         /// トグルボタンの初期化処理（トグルの生成，値の設定）
         /// </summary>
-        /// <param name="locales"></param>
-        /// <param name="defaultIndex"></param>
-        public void InitializeToggleValueWithoutNotify(List<Locale> locales, int defaultIndex)
+        /// <param name="locales">ロケールのリスト</param>
+        /// <param name="defaultIndex">デフォルトのロケールインデックス（最初に設定されるロケール）</param>
+        public void InitializeToggleValueWithoutNotify(IReadOnlyList<Locale> locales, int defaultIndex)
         {
             for (var i = 0; i < locales.Count; ++i)
             {

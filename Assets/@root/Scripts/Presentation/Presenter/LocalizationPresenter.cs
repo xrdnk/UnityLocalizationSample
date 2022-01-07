@@ -5,12 +5,15 @@ using UnityEngine;
 
 namespace Deniverse.UnityLocalizationSample.Presentation.Presenter
 {
+    /// <summary>
+    /// ローカライズに関わる部分のプレゼンター
+    /// </summary>
     public sealed class LocalizationPresenter : MonoBehaviour
     {
         [SerializeField] LocalizationService _localizationService;
         [SerializeField] LanguageSelectDropdownUIView _dropdownUIView;
         [SerializeField] LanguageSelectToggleUIView _toggleUIView;
-        [SerializeField] LocalizationUIView _localizationUIView;
+        [SerializeField] SampleLocalizationUIView _sampleLocalizationUIView;
 
         void Start()
         {
@@ -18,8 +21,8 @@ namespace Deniverse.UnityLocalizationSample.Presentation.Presenter
             _localizationService.InitializationCompletedEvent += _toggleUIView.InitializeToggleValueWithoutNotify;
             _localizationService.LocaleIndexChangedEvent += _dropdownUIView.UpdateDropdownValueWithoutNotify;
             _localizationService.LocaleIndexChangedEvent += _toggleUIView.UpdateToggleValueWithoutNotify;
-            _localizationService.AssetTableChangedEvent += _localizationUIView.SetFlagImage;
-            _localizationService.StringTableChangedEvent += _localizationUIView.SetTextMessage;
+            _localizationService.AssetTableChangedEvent += _sampleLocalizationUIView.SetFlagImage;
+            _localizationService.StringTableChangedEvent += _sampleLocalizationUIView.SetTextMessage;
             _dropdownUIView.SelectionChangedEvent += _localizationService.ChangeLocale;
             _toggleUIView.SelectionChangedEvent += _localizationService.ChangeLocale;
         }
@@ -30,8 +33,8 @@ namespace Deniverse.UnityLocalizationSample.Presentation.Presenter
             _localizationService.InitializationCompletedEvent -= _toggleUIView.InitializeToggleValueWithoutNotify;
             _localizationService.LocaleIndexChangedEvent -= _dropdownUIView.UpdateDropdownValueWithoutNotify;
             _localizationService.LocaleIndexChangedEvent -= _dropdownUIView.UpdateDropdownValueWithoutNotify;
-            _localizationService.AssetTableChangedEvent -= _localizationUIView.SetFlagImage;
-            _localizationService.StringTableChangedEvent -= _localizationUIView.SetTextMessage;
+            _localizationService.AssetTableChangedEvent -= _sampleLocalizationUIView.SetFlagImage;
+            _localizationService.StringTableChangedEvent -= _sampleLocalizationUIView.SetTextMessage;
             _dropdownUIView.SelectionChangedEvent -= _localizationService.ChangeLocale;
             _toggleUIView.SelectionChangedEvent -= _localizationService.ChangeLocale;
         }

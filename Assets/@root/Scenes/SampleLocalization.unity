@@ -618,7 +618,7 @@ MonoBehaviour:
   _localizationService: {fileID: 1839492563}
   _dropdownUIView: {fileID: 794336643}
   _toggleUIView: {fileID: 1874744789}
-  _localizationUIView: {fileID: 426058714}
+  _sampleLocalizationUIView: {fileID: 426058714}
 --- !u!1001 &1874744787
 PrefabInstance:
   m_ObjectHideFlags: 0

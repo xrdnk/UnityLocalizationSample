@@ -7,6 +7,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Deniverse.UnityLocalizationSample.Domain.Service
 {
+    /// <summary>
+    /// ローカライズに関するドメインサービス
+    /// </summary>
     public sealed class LocalizationService : MonoBehaviour
     {
         [SerializeField] LocalizedAssetTable _localizedSpriteTable;
@@ -14,27 +17,37 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
         [SerializeField] LocalizedStringTable _localizedStringTable;
         [SerializeField] LocalizedString _localizedMessageReference;
 
+        /// <summary>
+        /// ロケール初期設定用の AsyncOperationHandle
+        /// </summary>
         AsyncOperationHandle _initializeOperation;
 
-        public delegate void InitializationCompleted(List<Locale> locales, int defaultIndex);
+        public delegate void InitializationCompleted(IReadOnlyList<Locale> locales, int defaultIndex);
+        // ロケール初期設定が完了した時のイベントを発火
         public InitializationCompleted InitializationCompletedEvent;
 
         public delegate void LocaleIndexChanged(int localeIndex);
+        // ロケールインデックスに変更が走った時のイベントを発火
         public LocaleIndexChanged LocaleIndexChangedEvent;
 
         public delegate void StringTableChanged(string message);
+        // StringTable に変更が走った時のイベントを発火
         public StringTableChanged StringTableChangedEvent;
 
         public delegate void AssetTableChanged(Sprite flagSprite);
+        // AssetTable (ここでは Sprite のみ）に変更が走った時のイベントを発火
         public AssetTableChanged AssetTableChangedEvent;
 
         void Start()
         {
+            // Addressables を通して LocalizationSettings のロケール情報を非同期的に取得する
             _initializeOperation = LocalizationSettings.SelectedLocaleAsync;
+            // AsyncOperation 完了時の処理
             if (_initializeOperation.IsDone)
             {
                 OnInitializeCompleted(_initializeOperation);
             }
+            // AsyncOperation 未完了時の処理 (コールバック登録）
             else
             {
                 _initializeOperation.Completed += OnInitializeCompleted;
@@ -50,6 +63,10 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
             _localizedStringTable.TableChanged -= OnStringTableChanged;
         }
 
+        /// <summary>
+        /// ロケール初期設定完了時のフック関数
+        /// </summary>
+        /// <param name="handle"></param>
         void OnInitializeCompleted(AsyncOperationHandle handle)
         {
             var defaultIndex = 0;
@@ -66,19 +83,31 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
         }
 
-        void OnLocaleChanged(Locale locale)
+        /// <summary>
+        /// ロケール変更時のフック関数
+        /// </summary>
+        /// <param name="newLocale">新しいロケール</param>
+        void OnLocaleChanged(Locale newLocale)
         {
-            var index = LocalizationSettings.AvailableLocales.Locales.IndexOf(locale);
+            var index = LocalizationSettings.AvailableLocales.Locales.IndexOf(newLocale);
             LocaleIndexChangedEvent?.Invoke(index);
         }
 
-        void OnAssetTableChanged(AssetTable assetTable)
+        /// <summary>
+        /// AssetTable 変更時のフック関数
+        /// </summary>
+        /// <param name="newAssetTable">新しい AssetTable</param>
+        void OnAssetTableChanged(AssetTable newAssetTable)
         {
-            var operation = assetTable.GetAssetAsync<Sprite>(_localizedFlagReference.TableEntryReference);
+            var operation = newAssetTable.GetAssetAsync<Sprite>(_localizedFlagReference.TableEntryReference);
             operation.Completed += handle => AssetTableChangedEvent?.Invoke(handle.Result);
         }
 
-        void OnStringTableChanged(StringTable stringTable)
+        /// <summary>
+        /// StringTable 変更時のフック関数
+        /// </summary>
+        /// <param name="newStringTable">新しい StringTable</param>
+        void OnStringTableChanged(StringTable newStringTable)
         {
             var localizedString = _localizedMessageReference.GetLocalizedString();
             StringTableChangedEvent?.Invoke(localizedString);

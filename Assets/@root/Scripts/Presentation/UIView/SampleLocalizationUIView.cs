@@ -3,7 +3,10 @@ using UnityEngine.UI;
 
 namespace Deniverse.UnityLocalizationSample.Presentation.UIView
 {
-    public sealed class LocalizationUIView : MonoBehaviour
+    /// <summary>
+    /// サンプル用のローカライズビュー
+    /// </summary>
+    public sealed class SampleLocalizationUIView : MonoBehaviour
     {
         [SerializeField] Image _image_Flag;
         [SerializeField] Text _text_HelloWorld;

@@ -61,17 +61,6 @@ namespace Deniverse.UnityLocalizationSample.Presentation.Presentation.UIView
                             : locale.ToString())
                     .ToList();
 
-            // var options = new List<string>();
-            //
-            // foreach (var locale in locales)
-            // {
-            //     var displayName =
-            //         locale.Identifier.CultureInfo != null
-            //             ? locale.Identifier.CultureInfo.NativeName
-            //             : locale.ToString();
-            //     options.Add(displayName);
-            // }
-
             // オプションの List 要素数が 0 の時
             if (options.Count == 0)
             {

@@ -42,7 +42,9 @@ namespace Deniverse.UnityLocalizationSample.Presentation.UIView
                 var languageToggle = Instantiate(_togglePrefab, _container);
                 // トグルオブジェクトの名前とラベルにはネイティブネームを設定する
                 languageToggle.name = locale.Identifier.CultureInfo != null
+                    // CultureInfo が存在する場合は NativeName を表示する (例) ja-JP の場合は「日本語」，en-us の場合は「English」
                     ? locale.Identifier.CultureInfo.NativeName
+                    // 存在しない場合はロケール情報をそのまま表示する
                     : locale.ToString();
                 var label = languageToggle.GetComponentInChildren<Text>();
                 label.text = languageToggle.name;

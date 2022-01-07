@@ -40,14 +40,14 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
 
         void Start()
         {
-            // Addressables を通して LocalizationSettings のロケール情報を非同期的に取得する
-            _initializeOperation = LocalizationSettings.SelectedLocaleAsync;
+            // TODO: Addressables を通して LocalizationSettings のロケール情報を非同期的に取得する
+
             // AsyncOperation 完了時の処理
             if (_initializeOperation.IsDone)
             {
                 OnInitializeCompleted(_initializeOperation);
             }
-            // AsyncOperation 未完了時の処理 (コールバック登録）
+            // AsyncOperation 未完了時の処理
             else
             {
                 _initializeOperation.Completed += OnInitializeCompleted;
@@ -70,17 +70,14 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
         void OnInitializeCompleted(AsyncOperationHandle handle)
         {
             var defaultIndex = 0;
-            var locales = LocalizationSettings.AvailableLocales.Locales;
-            for (var i = 0; i < locales.Count; ++i)
-            {
-                var locale = locales[i];
-                if (LocalizationSettings.SelectedLocale == locale)
-                {
-                    defaultIndex = i;
-                }
-            }
-            InitializationCompletedEvent?.Invoke(locales, defaultIndex);
-            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+            // TODO: 利用可能なロケールを LocalizationSettings から取得する
+            // TODO: 最初に選択されたデフォルトのロケールをインデックスとして設定する
+            // TODO: 完了したことを通知する
+
+            // TODO: イベント発火
+
+            // TODO: ここでロケールが変更された時のコールバック登録をする
+
         }
 
         /// <summary>
@@ -89,8 +86,10 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
         /// <param name="newLocale">新しいロケール</param>
         void OnLocaleChanged(Locale newLocale)
         {
-            var index = LocalizationSettings.AvailableLocales.Locales.IndexOf(newLocale);
-            LocaleIndexChangedEvent?.Invoke(index);
+            // TODO: ロケール → インデックス変換
+
+            // TODO: イベント発火
+
         }
 
         /// <summary>
@@ -99,8 +98,10 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
         /// <param name="newAssetTable">新しい AssetTable</param>
         void OnAssetTableChanged(AssetTable newAssetTable)
         {
-            var operation = newAssetTable.GetAssetAsync<Sprite>(_localizedFlagReference.TableEntryReference);
-            operation.Completed += handle => AssetTableChangedEvent?.Invoke(handle.Result);
+            // TODO: GetAssetAsync<TObject>(TableEntryReference) で国旗アセットを取得
+
+            // TODO: 取得完了時にイベント発火
+
         }
 
         /// <summary>
@@ -109,8 +110,9 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
         /// <param name="newStringTable">新しい StringTable</param>
         void OnStringTableChanged(StringTable newStringTable)
         {
-            var localizedString = _localizedMessageReference.GetLocalizedString();
-            StringTableChangedEvent?.Invoke(localizedString);
+            // TODO: LocalizedStringReference.GetLocalizedString でローカライズ文字列を取得
+
+            // TODO: イベント発火
         }
 
         /// <summary>
@@ -119,8 +121,8 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
         /// <param name="index">該当ロケールのインデックス</param>
         public void ChangeLocale(int index)
         {
-            var locale = LocalizationSettings.AvailableLocales.Locales[index];
-            LocalizationSettings.SelectedLocale = locale;
+            // TODO: 現在のロケールを設定
+
         }
     }
 }

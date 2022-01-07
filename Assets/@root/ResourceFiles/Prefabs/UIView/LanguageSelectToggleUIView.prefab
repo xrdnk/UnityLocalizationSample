@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 7117076568711646292}
   - component: {fileID: 1770155420}
   m_Layer: 5
-  m_Name: Language Menu - List
+  m_Name: LanguageSelectToggleUIView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

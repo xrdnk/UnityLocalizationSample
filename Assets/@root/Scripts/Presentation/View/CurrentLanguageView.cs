@@ -2,11 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Deniverse.UnityLocalizationSample.Domain.Service
+namespace Deniverse.UnityLocalizationSample.Presentation.View
 {
-    public sealed class ScriptableObjectSetter : MonoBehaviour
+    public sealed class CurrentLanguageView : MonoBehaviour
     {
-        [SerializeField] Text _text;
+        [SerializeField] Text _text_CurrentLanguage;
 
         ISampleStore _sampleStore;
 
@@ -19,7 +19,7 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
 
             if (_sampleStore != null)
             {
-                _text.text = _sampleStore.SampleText;
+                _text_CurrentLanguage.text = _sampleStore.SampleText;
             }
         }
     }

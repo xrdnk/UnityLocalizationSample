@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Deniverse.UnityLocalizationSample.Domain.Service
+namespace Deniverse.UnityLocalizationSample.Presentation.View
 {
     /// <summary>
     /// プレハブのスポーナー

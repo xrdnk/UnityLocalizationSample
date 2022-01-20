@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
-namespace Deniverse.UnityLocalizationSample.Presentation.UIView
+namespace Deniverse.UnityLocalizationSample.Presentation.View
 {
     /// <summary>
     /// トグル形式でローカライズ情報を表示するビュー

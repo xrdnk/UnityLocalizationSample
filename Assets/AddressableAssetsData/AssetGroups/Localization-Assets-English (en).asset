@@ -22,6 +22,21 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
+  - m_GUID: 9e0b54b0e3d57c84d97ca75e8ffc098d
+    m_Address: HelloWorld
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+  - m_GUID: b1e62010a8e737245bd0901fa866ad5e
+    m_Address: SampleStore_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+  - m_GUID: a72e276833204824d8e2fbc75ecb8868
+    m_Address: Cube
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5aa5a144ef70c3646ab60f5d80223d58, type: 2}
   m_SchemaSet:

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Deniverse.UnityLocalizationSample.Domain.Extension;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -12,10 +14,25 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
     /// </summary>
     public sealed class LocalizationService : MonoBehaviour
     {
+        [Header("スプライト設定")]
         [SerializeField] LocalizedAssetTable _localizedSpriteTable;
         [SerializeField] LocalizedSprite _localizedFlagReference;
+
+        [Header("文字列設定")]
         [SerializeField] LocalizedStringTable _localizedStringTable;
         [SerializeField] LocalizedString _localizedMessageReference;
+
+        [Header("オーディオ設定")]
+        [SerializeField] LocalizedAssetTable _localizedAudioTable;
+        [SerializeField] LocalizedAudioClip _localizedAudioClipReference;
+
+        [Header("プレハブ設定")]
+        [SerializeField] LocalizedAssetTable _localizedPrefabTable;
+        [SerializeField] LocalizedGameObject _localizedPrefabReference;
+
+        [Header("Scriptable Object 設定")]
+        [SerializeField] LocalizedAssetTable _localizedScriptableObjectTable;
+        [SerializeField] LocalizedScriptableObject _localizedScriptableObjectReference;
 
         /// <summary>
         /// ロケール初期設定用の AsyncOperationHandle
@@ -35,8 +52,20 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
         public StringTableChanged StringTableChangedEvent;
 
         public delegate void AssetTableChanged(Sprite flagSprite);
-        // AssetTable (ここでは Sprite のみ）に変更が走った時のイベントを発火
-        public AssetTableChanged AssetTableChangedEvent;
+        // SpriteTable に変更が走った時のイベントを発火
+        public AssetTableChanged SpriteTableChangedEvent;
+
+        public delegate void AssetAudioChanged(AudioClip audioClip);
+        // AudioTable に変更が走った時のイベントを発火
+        public AssetAudioChanged AudioTableChangedEvent;
+
+        public delegate void AssetPrefabChanged(GameObject prefab);
+        // PrefabTable に変更が走った時のイベントを発火
+        public AssetPrefabChanged PrefabTableChangedEvent;
+
+        public delegate void AssetScriptableObjectChanged(ScriptableObject scriptableObject);
+        // ScriptableObjectTable に変更が走った時のイベントを発火
+        public AssetScriptableObjectChanged ScriptableObjectTableChangedEvent;
 
         void Start()
         {
@@ -51,16 +80,22 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
             else
             {
                 _initializeOperation.Completed += OnInitializeCompleted;
-                _localizedSpriteTable.TableChanged += OnAssetTableChanged;
                 _localizedStringTable.TableChanged += OnStringTableChanged;
+                _localizedSpriteTable.TableChanged += OnSpriteTableChanged;
+                _localizedAudioTable.TableChanged += OnAudioTableChanged;
+                _localizedPrefabTable.TableChanged += OnPrefabTableChanged;
+                _localizedScriptableObjectTable.TableChanged += OnScriptableObjectTableChanged;
             }
         }
 
         void OnDestroy()
         {
             LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
-            _localizedSpriteTable.TableChanged -= OnAssetTableChanged;
             _localizedStringTable.TableChanged -= OnStringTableChanged;
+            _localizedSpriteTable.TableChanged -= OnSpriteTableChanged;
+            _localizedAudioTable.TableChanged -= OnAudioTableChanged;
+            _localizedPrefabTable.TableChanged -= OnPrefabTableChanged;
+            _localizedScriptableObjectTable.TableChanged -= OnScriptableObjectTableChanged;
         }
 
         /// <summary>
@@ -93,26 +128,50 @@ namespace Deniverse.UnityLocalizationSample.Domain.Service
         }
 
         /// <summary>
-        /// AssetTable 変更時のフック関数
+        /// StringTable 変更時のフック関数
         /// </summary>
-        /// <param name="newAssetTable">新しい AssetTable</param>
-        void OnAssetTableChanged(AssetTable newAssetTable)
+        void OnStringTableChanged(StringTable newStringTable)
+        {
+            var localizedString = _localizedMessageReference.GetLocalizedString();
+            StringTableChangedEvent?.Invoke(localizedString);
+        }
+
+        /// <summary>
+        /// SpriteTable 変更時のフック関数
+        /// </summary>
+        void OnSpriteTableChanged(AssetTable newAssetTable)
         {
             // TODO: GetAssetAsync<TObject>(TableEntryReference) で国旗アセットを取得
 
             // TODO: 取得完了時にイベント発火
-
         }
 
         /// <summary>
-        /// StringTable 変更時のフック関数
+        /// AudioTable 変更時のフック関数
         /// </summary>
-        /// <param name="newStringTable">新しい StringTable</param>
-        void OnStringTableChanged(StringTable newStringTable)
+        void OnAudioTableChanged(AssetTable newAudioTable)
         {
             // TODO: LocalizedStringReference.GetLocalizedString でローカライズ文字列を取得
 
             // TODO: イベント発火
+        }
+
+        /// <summary>
+        /// PrefabTable 変更時のフック関数
+        /// </summary>
+        void OnPrefabTableChanged(AssetTable newPrefabTable)
+        {
+            var operation = newPrefabTable.GetAssetAsync<GameObject>(_localizedPrefabReference.TableEntryReference);
+            operation.Completed += handle => PrefabTableChangedEvent?.Invoke(handle.Result);
+        }
+
+        /// <summary>
+        /// ScriptableObjectTable 変更時のフック関数
+        /// </summary>
+        void OnScriptableObjectTableChanged(AssetTable newScriptableObjectTable)
+        {
+            var operation = newScriptableObjectTable.GetAssetAsync<ScriptableObject>(_localizedScriptableObjectReference.TableEntryReference);
+            operation.Completed += handle => ScriptableObjectTableChangedEvent?.Invoke(handle.Result);
         }
 
         /// <summary>

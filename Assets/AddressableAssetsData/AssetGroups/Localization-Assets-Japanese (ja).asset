@@ -22,6 +22,21 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja
+  - m_GUID: b27c38334334b304aa9beff39b84e4f2
+    m_Address: "\u30CF\u30ED\u30FC\u30EF\u30FC\u30EB\u30C9"
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+  - m_GUID: a3d22853977f82c419f92ae4fcc9474d
+    m_Address: SampleStore_jp
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+  - m_GUID: 3fea46de1d0ca794798bc8d6fa1396e1
+    m_Address: Sphere
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5aa5a144ef70c3646ab60f5d80223d58, type: 2}
   m_SchemaSet:

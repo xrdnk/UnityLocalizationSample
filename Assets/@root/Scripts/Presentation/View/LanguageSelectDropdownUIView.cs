@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
-namespace Deniverse.UnityLocalizationSample.Presentation.Presentation.UIView
+namespace Deniverse.UnityLocalizationSample.Presentation.View
 {
     /// <summary>
     /// ドロップダウン形式でローカライズ情報を表示するビュー

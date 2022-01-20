@@ -23,6 +23,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     - Preload
+  - m_GUID: a7f9a90922fc7d14cb5cb123e59e9e02
+    m_Address: SampleAudioTable_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: 284b18c478218cc4a9e2cecc19dc97e2
+    m_Address: SampleSOTable_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: ec68f607218c95d48914e2f6d8b797bb
+    m_Address: SamplePrefabTable_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5aa5a144ef70c3646ab60f5d80223d58, type: 2}
   m_SchemaSet:

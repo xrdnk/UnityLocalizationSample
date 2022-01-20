@@ -25,6 +25,18 @@ MonoBehaviour:
     m_Address: Assets/@root/MasterData/Localization/SampleStringTable Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: d924532177037be4b963ed81ea3dd9a1
+    m_Address: Assets/@root/MasterData/Localization/SampleAudioTable Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 4cefef19c9c42a942a361d756b01c1f7
+    m_Address: Assets/@root/MasterData/Localization/SampleSOTable Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: bb131d188fffd1242b96d6e05de08665
+    m_Address: Assets/@root/MasterData/Localization/SamplePrefabTable Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5aa5a144ef70c3646ab60f5d80223d58, type: 2}
   m_SchemaSet:

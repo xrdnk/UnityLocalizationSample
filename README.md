@@ -6,4 +6,4 @@ Samples of Unity Localization.</br>
 
 - Unity 2021.2.13f1
 - Localization 1.0.5
-- Addressables 1.19.19
+- Addressables 1.19.17
